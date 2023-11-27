@@ -53,6 +53,7 @@ namespace Email
 
                 // Submitting the form
                 document.forms[0].submit();
+
             }           
         }
     }
