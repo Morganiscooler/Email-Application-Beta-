@@ -47,6 +47,6 @@
         </TabControl>
         <Menu x:Name="Menu" Margin="28,57,156,0" Background="#FFD8D8D8" Grid.RowSpan="2"/>
         <Label x:Name="Important1" Content="Important
-               " HorizontalAlignment="Left" Margin="28,23,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="151" FontFamily="Sitka Small Semibold" FontSize="25" Height="33" IsVisibleChanged="Inbox_Copy_IsVisibleChanged"/>
+               " HorizontalAlignment="Left" Margin="28,23,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="151" FontFamily="Sitka Small Semibold" FontSize="25" Height="33"/>
     </Grid>
 </Window>
