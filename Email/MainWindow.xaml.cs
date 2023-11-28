@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
+using System.Windows;
 namespace Email
 {
     /// <summary>
@@ -19,16 +23,38 @@ namespace Email
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string ClientId = "YourClientId";
+        private const string RedirectUri = "urn:ietf:wg:oauth:2.0:oob";
+        private const string AuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
+        private const string TokenEndpoint = "https://oauth2.googleapis.com/token";
+        private const string Scope = "https://www.googleapis.com/auth/userinfo.profile";
         public MainWindow()
         {
-            
+
             InitializeComponent();
-            webBrowser.Navigate(new Uri("https://www.gmail.com"));
-            webBrowser.LoadCompleted += WebBrowser_LoadCompleted;
+
+            // Start the OAuth process
+            StartOAuth();
 
         }
+        private void StartOAuth()
+        {
+            // Generate the authorization URL
+            var authorizationUrl = $"{AuthEndpoint}?client_id={ClientId}&redirect_uri={RedirectUri}&scope={Scope}&response_type=code";
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            // Navigate to the authorization URL
+            webBrowser.Source = new Uri(authorizationUrl);
+        }
+
+        private void Tab1_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+        private void Tab2_Clicked(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void Tab3_Clicked(object sender, MouseButtonEventArgs e)
         {
 
         }
@@ -39,22 +65,40 @@ namespace Email
 
             //webBrowser.Navigate("https://mail.google.com/mail/u/4/#inbox"); (come back later)
         }
-        private void WebBrowser_LoadCompleted(object sender, NavigationEventArgs e)
+        private async void WebBrowser_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            // Injecting JavaScript to fill in the login form
-            dynamic document = webBrowser.Document;
-            dynamic loginElement = document.getElementById("identifierId");
-            dynamic passwordElement = document.getElementsByName("password")[0];
-
-            if (loginElement != null && passwordElement != null)
+            // Check if the URL contains the authorization code
+            if (webBrowser.Source.AbsoluteUri.StartsWith(RedirectUri))
             {
-                loginElement.value = "YourEmailAddress@gmail.com";
-                passwordElement.value = "YourPassword";
+                // Parse the authorization code from the URL
+                var queryString = webBrowser.Source.Query;
+                var parameters = HttpUtility.ParseQueryString(queryString);
+                var authorizationCode = parameters.Get("code");
 
-                // Submitting the form
-                document.forms[0].submit();
+                // Exchange the authorization code for an access token
+                var accessToken = await ExchangeCodeForAccessToken(authorizationCode);
 
-            }           
+                // You can now use the accessToken to make requests to the Google API
+                MessageBox.Show($"Access Token: {accessToken}");
+
+                // Close the window or perform further actions as needed
+                Close();
+            }
         }
+        private async Task<string> ExchangeCodeForAccessToken(string authorizationCode)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestBody = $"code={authorizationCode}&client_id={ClientId}&client_secret=YourClientSecret&redirect_uri={RedirectUri}&grant_type=authorization_code";
+
+                var response = await client.PostAsync(TokenEndpoint, new StringContent(requestBody));
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Parse the access token from the response
+                var parameters = HttpUtility.ParseQueryString(responseContent);
+                return parameters.Get("access_token");
+            }
+        }
+
     }
 }

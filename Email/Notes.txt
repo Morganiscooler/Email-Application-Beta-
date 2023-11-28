@@ -1,3 +1,7 @@
 Questions to solve:
 
 How can I put my gmail login in the webbrowser itself in wpf?
+How to create OAuth for google in a WPF, without it opening a new browser window.
+
+Make sure to change:
+Line 84 - Change "YourClientSecret" and "YourClientId"
