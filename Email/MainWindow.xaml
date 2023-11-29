@@ -18,19 +18,20 @@
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="115*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="Important" Content="Important" HorizontalAlignment="Left" Margin="19,22,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="148" FontFamily="Sitka Small Semibold" FontSize="25" Height="35"/>
         <TabControl Grid.ColumnSpan="5" Background="#FFC2C2C2" Grid.RowSpan="2">
             <TabItem x:Name="Tab1" Header="Inbox">
-                <Grid Background="#c2c2c2" MaxHeight="450" MaxWidth="800" MinWidth="800" MinHeight="450">
+                <!--tab 1-->
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="7*"/>
-                        <RowDefinition Height="68*"/>
+                        <RowDefinition Height="225*"/>
+                        <RowDefinition Height="209*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60*"/>
-                        <ColumnDefinition Width="167*"/>
-                        <ColumnDefinition Width="27*"/>
-                        <ColumnDefinition Width="546*"/>
+                        <ColumnDefinition Width="412*"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="246*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="115*"/>
                     </Grid.ColumnDefinitions>
                     <WebBrowser x:Name="webBrowser" Margin="18,10,18,51" Opacity="0.25" Grid.Column="3" Loaded="webBrowser_Loaded" Grid.RowSpan="2"/>
                     <StackPanel HorizontalAlignment="Left" Height="274" Margin="55,4,0,0" VerticalAlignment="Top" Width="244" Grid.ColumnSpan="4" Grid.Row="1"/>
@@ -38,16 +39,36 @@
                     <Label x:Name="Inbox" Content="Inbox" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="92" FontFamily="Sitka Small Semibold" FontSize="25" Height="33" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
+
             <TabItem x:Name="Tab2" Header="Important">
-                <Label x:Name="Important1" Content="Important"
-                  HorizontalAlignment="Left" Margin="28,23,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="151" FontFamily="Sitka Small Semibold" FontSize="25" Height="33"/>
-                <WebBrowser x:Name="webBrowser2" Margin="272,0,12,0" Opacity="0.25" Loaded="webBrowser_Loaded" Height="389"/>
+                <!--tab 2-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="225*"/>
+                        <RowDefinition Height="209*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="412*"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="246*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="115*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="Important" Content="Important" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="92" FontFamily="Sitka Small Semibold" FontSize="25" Height="33" Grid.ColumnSpan="2"/>
+                    <StackPanel HorizontalAlignment="Left" Margin="28,23,0,0" VerticalAlignment="Top" Background="#FFC2C2C2" Width="151" Grid.ColumnSpan="4" Grid.Row="1"/>
+                    <WebBrowser x:Name="webBrowser2" Margin="272,0,23,17" Opacity="0.25" Loaded="webBrowser_Loaded" Height="389" Grid.ColumnSpan="5" Grid.RowSpan="2"/>
+                </Grid>
+
+
             </TabItem>
             <TabItem x:Name="Tab3" Header="Trash" Margin="-2,-2,-2,0">
+                <!--tab 1-->
+                <!--insert grid here-->
                 <WebBrowser x:Name="webBrowser3" Margin="272,0,12,0" Opacity="0.25" Loaded="webBrowser_Loaded" Height="389"/>
             </TabItem>
         </TabControl>
         <Menu x:Name="Menu" Margin="28,57,156,0" Background="#FFD8D8D8" Grid.RowSpan="2"/>
-        
+
     </Grid>
 </Window>
