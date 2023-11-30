@@ -5,3 +5,8 @@ How to create OAuth for google in a WPF, without it opening a new browser window
 
 Make sure to change:
 Line 84 - Change "YourClientSecret" and "YourClientId"
+
+Make sure to:
+1.Create a menu that pops up new inbox emails
+2.After clicking on a email popup, data sends to webBrowser control
+3.webBrowser control must open the full, clicked email
